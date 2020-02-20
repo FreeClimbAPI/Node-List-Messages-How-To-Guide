@@ -28,6 +28,6 @@ To get started using a FreeClimb account, follow the instructions [here](https:/
 1. Run the application using command:
 
    ```bash
-   $ node listMemebers.js
+   $ node listMessages.js
    ```
 

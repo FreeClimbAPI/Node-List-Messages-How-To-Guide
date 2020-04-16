@@ -1,6 +1,6 @@
 # Node - List Messages Tutorial
 
-This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/list-queue-members#section-nodejs). Specifically, the project will:
+This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/how-to-list-messages#section-nodejs). Specifically, the project will:
 
 - List messages that were sent or received with your account   
 

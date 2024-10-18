@@ -3,28 +3,24 @@ const freeclimbSDK = require('@freeclimb/sdk')
 
 const accountId = process.env.ACCOUNT_ID
 const apiKey = process.env.API_KEY
-// your freeclimb API key (available in the Dashboard) - be sure to set up environment variables to store these values
-const freeclimb = freeclimbSDK(accountId, apiKey)
+const configuration = freeclimbSDK.createConfiguration({ accountId, apiKey })
+const freeclimb = new freeclimbSDK.DefaultApi(configuration)
 
 getMessages().then(messages => {
-  // Use messages
+  console.log('got messages', messages)
 }).catch(err => {
-  // Catch Errors
+  console.log(err)
 })
 
 async function getMessages() {
-  // Create array to store all members 
   const messages = []
-  // Invoke GET method to retrieve initial list of members information
-  const first = await freeclimb.api.messages.getList()
-  messages.push(...first.messages)
-  // Get Uri for next page
-  let nextPageUri = first.nextPageUri
-  // Retrieve entire members list 
-  while (nextPageUri) {
-    const nextPage = await freeclimb.api.messages.getNextPage(nextPageUri)
-    messages.push(...nextPage.messages)
-    nextPageUri = nextPage.nextPageUri
+
+  let response = await freeclimb.listSmsMessages()
+  messages.push(...response.messages)
+
+  while (response.nextPageUri) {
+    response = await freeclimb.getNextPage(response)
+    messages.push(...response.messages)
   }
   return messages
 }
